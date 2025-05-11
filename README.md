@@ -1,87 +1,43 @@
 
+## 1. Project Overview
 
-# Gasless-USDT0-Flow
+**Gasless USD₮0 Demo**
+This project demonstrates a “gasless” token-transfer flow on the Flare Network using a two-piece architecture:
 
-**Purpose:** a from-scratch, end-to-end example showing how to build and run a gasless USD₮0 transfer flow on Flare.  
-Front-end (React + Ethers.js) → Relayer (Express + ethers.js) → Flare network (USD₮0 ERC-3009).
+1. **Front-end (React + Ethers.js)**
 
-___
+   * Presents a simple UI: a “recipient” field, an “amount” field, and a “Send Gasless” button.
+   * Builds an [EIP-712](https://eips.ethereum.org/EIPS/eip-712) “transferWithAuthorization” payload off-chain (including timestamps, nonce, etc.).
+   * Prompts the user’s wallet (e.g. MetaMask) for an EIP-712 signature of that payload—**no gas needed from the user at this step**.
+   * Sends the signed payload to the relayer via a POST request.
 
-## Repo Layout
+2. **Relayer (Express + Ethers.js)**
 
-```
+   * Listens for `/relay-transfer` requests.
+   * Verifies and submits the user’s signed “transferWithAuthorization” on-chain by calling the USD₮0 contract’s `transferWithAuthorization(...)` method, paying the FLR gas itself.
+   * Returns the resulting on-chain transaction hash back to the front-end.
 
-gasless-usdt0-demo/
-├── frontend/
-│   ├── .env.local           # ← fill these after copying from root .env
-│   ├── package.json
-│   ├── src/
-│   │   ├── App.tsx
-│   │   └── USD0.json        # ERC-3009 ABI
-├── relayer/
-│   ├── .env                 # ← copy from root .env
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── src/
-│       └── index.ts
-├── .env.example
-└── README.md
-
-````
-
-___
-
-## Installation
-
-```bash
-git clone https://github.com/vmmunoza/Gasless-USDT0-Flow
-cd Gasless-USDT0-Flow
-````
-
-### Copy & fill keys
-
-```bash
-cp .env.example .env
-cd frontend && cp ../.env.example .env.local
-```
-
-### Install deps
-
-```bash
-npm --prefix frontend install
-npm --prefix relayer install
-```
+Together, this setup lets end users move USD₮0 tokens without holding any FLR—they only sign a message, and the relayer covers the gas.
 
 ---
 
-## Run the Relayer
+## 2. Current Status & Challenges
 
-```bash
-cd relayer
-npm run start
-# → Express listening on http://localhost:3000
-```
+* **What works**
+
+  * Front-end UI renders.
+  * MetaMask pops up for an EIP-712 signature.
+  * Relayer compiles, binds to `http://localhost:3000`, and responds to `GET /` with “✅ Gasless relayer up and running”.
+
+* **Remaining challenge**
+  After signing, the front-end console shows:
+
+  ```
+  Uncaught TypeError: Cannot set property ethereum of #<Window> ...
+  Uncaught TypeError: Cannot redefine property: ethereum ...
+  ```
+
+  These errors originate in the injected-provider library (used by `ethers.BrowserProvider`) when it tries to monkey-patch `window.ethereum`, which conflicts with MetaMask’s built-in getter. As a result, the `sendGasless()` sequence never completes its EIP-712 call and never POSTs to the relayer.
 
 ---
 
-## Run the Frontend
-
-```bash
-cd frontend
-npm run start
-# → React on http://localhost:3001 (or default CRA port)
-```
-
----
-
-## Demo Flow
-
-* Connect MetaMask to Flare Mainnet.
-* Enter Recipient & Amount, click **Send Gasless**.
-* MetaMask prompts for an EIP-712 signature.
-* The front-end POSTs `{ payload, v, r, s }` to your relayer.
-* Relayer calls `transferWithAuthorization(...)`, pays FLR gas, returns the tx hash.
-* You see the Flare TX pop up.
-
-```
-```
