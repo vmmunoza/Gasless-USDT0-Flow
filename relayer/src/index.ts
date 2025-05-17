@@ -48,7 +48,7 @@ app.post("/relay-transfer", async (req, res) => {
       { gasLimit: 120_000 }
     );
     const receipt = await tx.wait();
-    res.json({ txHash: receipt.transactionHash });
+    res.json({ txHash: tx.hash });
   } catch (err: any) {
     console.error("Relayer error:", err);
     res.status(500).json({ error: err.message });
