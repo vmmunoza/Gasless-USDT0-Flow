@@ -57,10 +57,12 @@ export default function App() {
       nonce
     };
 
-    // — 4) Sign it with EIP-712 —
-    // _signTypedData is currently only on the low-level signer API
-    const rawSig = await (signer as any)._signTypedData(domain, types, message);
+    // — 4) Sign it with EIP-712 — (ethers v6)
+    // double check the ethers version in the docs
+    const rawSig = await signer.signTypedData(domain, types, message);
     const { v, r, s } = ethers.Signature.from(rawSig);
+
+
 
     // — 5) POST to your relayer —
     const resp = await fetch(`${RELAYER_URL}/relay-transfer`, {
