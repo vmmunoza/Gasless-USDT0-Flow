@@ -18,8 +18,6 @@ This project demonstrates a gasless token-transfer flow on the Flare Network usi
 This setup lets end users move USD₮0 tokens without holding any FLR—they only sign a message, and the relayer covers the gas.
 ___
 
-Let’s get your `.env` wired up so both the relayer and the React app talk to the right network, token and key. We’ll do it in five simple steps.
-
 ---
 
 # Step by step guide:
