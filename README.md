@@ -16,7 +16,6 @@ This project demonstrates a gasless token-transfer flow on the Flare Network usi
    * Returns the resulting on-chain transaction hash back to the front-end.
 
 This setup lets end users move USD₮0 tokens without holding any FLR—they only sign a message, and the relayer covers the gas.
-___
 
 ---
 
