@@ -22,7 +22,7 @@ ___
 
 # Step by step guide:
 
-## 1️⃣ Copy the example file
+## 1. Copy the example file
 
 In your project root (where you see `.env.example`, `frontend/` and `relayer/`), open a PowerShell or terminal and run:
 
@@ -34,7 +34,7 @@ This creates `.env` with all the placeholders.
 
 ---
 
-## 2️⃣ Fill in the relayer settings
+## 2. Fill in the relayer settings
 
 Open **`.env`** in your editor. In the **back‑end** section, set:
 
@@ -48,13 +48,12 @@ RELAYER_PRIVATE_KEY=…  # a private key of an account with FLR (or test FLR) on
 PORT=3000              # (or your preferred port)
 ```
 
-* If you’re demoing locally, you can point `FLARE_RPC_URL` at your Hardhat node and use one of the “Account #” private keys printed by `npx hardhat node`.
-* On Coston2/testnet, use an account you’ve topped up with test FLR.
-* Note: the current project setup has been implemented on the mainnet.
+* Note 1: If you’re demoing locally, you can point `FLARE_RPC_URL` at your Hardhat node and use one of the “Account #” private keys printed by `npx hardhat node`. ( On Coston2/testnet, use an account you’ve topped up with test FLR.)
+* Note 2: The current project setup has been implemented on mainnet.
 
 ---
 
-## 3️⃣ Verify the front‑end wiring
+## 3. Verify the front‑end wiring
 
 Still in the same `.env`, confirm (or adjust) the **front‑end** vars:
 
@@ -68,7 +67,7 @@ Vite will automatically expose any `VITE_…` keys to your React code via `impor
 
 ---
 
-## 4️⃣ Install dependencies
+## 4. Install dependencies
 
 Now pull in all the packages:
 
@@ -82,7 +81,7 @@ cd relayer && npm install && cd ../frontend && npm install && cd ..
 
 ---
 
-## 5️⃣ Fire it up
+## 5. Launch the application
 
 Open **two** terminals:
 
