@@ -48,7 +48,7 @@ RELAYER_PRIVATE_KEY=…  # a private key of an account with FLR (or test FLR) on
 PORT=3000              # (or your preferred port)
 ```
 
-* If you’re demoing locally, point `FLARE_RPC_URL` at your Hardhat node and use one of the “Account #” private keys printed by `npx hardhat node`.
+* If you’re demoing locally, you can point `FLARE_RPC_URL` at your Hardhat node and use one of the “Account #” private keys printed by `npx hardhat node`.
 * On Coston2/testnet, use an account you’ve topped up with test FLR.
 * Note: the current project setup has been implemented on the mainnet.
 
@@ -106,6 +106,8 @@ Open **two** terminals:
 
 ---
 
-Once both services are running, head to the React UI, fill in a recipient and amount, sign the MetaMask prompt, and watch the USD₮0 move—all without you holding any FLR!
+Once both services are running, head to the React UI, fill in a recipient and amount, sign the MetaMask prompt, and watch the USD₮0 move—all without the user holding any FLR.
+
+You can visit the complete documentation section at the [Flare Dev Hub](https://dev.flare.network/network/guides/gasless-usdt0-transfers)
 
 
