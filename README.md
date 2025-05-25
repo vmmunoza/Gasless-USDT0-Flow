@@ -21,6 +21,13 @@ This setup lets end users move USD₮0 tokens without holding any FLR—they onl
 
 # Step by step guide:
 
+Clone the repository:
+
+```powershell
+git clone https://github.com/vmmunoza/Gasless-USDT0-Flow.git
+```
+And make sure you comply with all relevant dependencies (Node.js, `npm`, and EOA with FLR tokens for the relayer).
+
 ## 1. Copy the example file
 
 In your project root (where you see `.env.example`, `frontend/` and `relayer/`), open a PowerShell or terminal and run:
