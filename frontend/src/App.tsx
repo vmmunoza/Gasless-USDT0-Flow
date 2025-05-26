@@ -50,7 +50,7 @@ export default function App() {
     const message = {
       from,
       to,
-      // <-- serialize to string so JSON.stringify works:
+      // Serialize amount (in smallest units) to string so JSON.stringify works
       value: ethers.parseUnits(amount, 6).toString(),
       validAfter,
       validBefore,
