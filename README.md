@@ -114,5 +114,6 @@ Open **two** terminals:
 Once both services are running, head to the React UI, fill in a recipient and amount, sign the MetaMask prompt, and watch the USD₮0 move—all without the user holding any FLR.
 
 You can visit the complete documentation section at the [Flare Dev Hub](https://dev.flare.network/network/guides/gasless-usdt0-transfers)
+---
 
-*New:* DeepWiki - https://deepwiki.com/vmmunoza/Gasless-USDT0-Flow 
+### *New:* DeepWiki - https://deepwiki.com/vmmunoza/Gasless-USDT0-Flow 
